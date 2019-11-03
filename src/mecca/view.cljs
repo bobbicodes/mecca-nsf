@@ -31,5 +31,5 @@
       [:h2 "Header:"]
       [:p (apply str (take 10 @file))]
       (if (= (apply str (take 10 @file)) "4e45534d1a")
-        [:h3 "This is a valid NSF file"])])
+        [:h3.green "This is a valid NSF file!"])])
    ])
