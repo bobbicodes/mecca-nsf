@@ -20,6 +20,9 @@
           (.readAsArrayBuffer reader file)
           (set! (.-onload reader)
                 (fn [e]
-                  (dispatch [:file-upload (crypt/byteArrayToHex (js/Uint8Array. (-> e .-target .-result)))])))))}]]
+                  (dispatch [:file-upload
+                             (crypt/byteArrayToHex
+                              (js/Uint8Array. (-> e .-target .-result)))
+                             ])))))}]]
    [:h2 "Hex dump:"]
    [:p (str @(subscribe [:file-upload]))]])
