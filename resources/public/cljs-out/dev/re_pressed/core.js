@@ -1,56 +1,55 @@
-// Compiled by ClojureScript 1.10.339 {}
+// Compiled by ClojureScript 1.10.339 {:static-fns true, :optimize-constants true}
 goog.provide('re_pressed.core');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('re_frame.core');
 goog.require('re_pressed.impl');
-re_frame.core.reg_event_fx.call(null,new cljs.core.Keyword("re-pressed.core","add-keyboard-event-listener","re-pressed.core/add-keyboard-event-listener",719500381),(function (_,p__12162){
-var vec__12163 = p__12162;
-var ___$1 = cljs.core.nth.call(null,vec__12163,(0),null);
-var event_type = cljs.core.nth.call(null,vec__12163,(1),null);
-return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword("re-pressed.core","keyboard-event","re-pressed.core/keyboard-event",-1923839752),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"event-type","event-type",319722813),event_type], null)], null);
+re_frame.core.reg_event_fx.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$re_DASH_pressed$core_SLASH_add_DASH_keyboard_DASH_event_DASH_listener,(function (_,p__14026){
+var vec__14027 = p__14026;
+var ___$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14027,(0),null);
+var event_type = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14027,(1),null);
+return new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keyboard_DASH_event,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$event_DASH_type,event_type], null)], null);
 }));
-re_frame.core.reg_event_fx.call(null,new cljs.core.Keyword("re-pressed.core","set-keydown-rules","re-pressed.core/set-keydown-rules",1002257871),(function (p__12166,p__12167){
-var map__12168 = p__12166;
-var map__12168__$1 = ((((!((map__12168 == null)))?(((((map__12168.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__12168.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__12168):map__12168);
-var db = cljs.core.get.call(null,map__12168__$1,new cljs.core.Keyword(null,"db","db",993250759));
-var vec__12169 = p__12167;
-var _ = cljs.core.nth.call(null,vec__12169,(0),null);
-var map__12172 = cljs.core.nth.call(null,vec__12169,(1),null);
-var map__12172__$1 = ((((!((map__12172 == null)))?(((((map__12172.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__12172.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__12172):map__12172);
-var opts = map__12172__$1;
-var event_keys = cljs.core.get.call(null,map__12172__$1,new cljs.core.Keyword(null,"event-keys","event-keys",-835966631));
-var clear_keys = cljs.core.get.call(null,map__12172__$1,new cljs.core.Keyword(null,"clear-keys","clear-keys",-1035470539));
-var always_listen_keys = cljs.core.get.call(null,map__12172__$1,new cljs.core.Keyword(null,"always-listen-keys","always-listen-keys",497991050));
-var prevent_default_keys = cljs.core.get.call(null,map__12172__$1,new cljs.core.Keyword(null,"prevent-default-keys","prevent-default-keys",1744205310));
-return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"db","db",993250759),cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keydown","re-pressed.core/keydown",-1588093301),new cljs.core.Keyword(null,"keys","keys",1068423698)], null),null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keydown","re-pressed.core/keydown",-1588093301),new cljs.core.Keyword(null,"event-keys","event-keys",-835966631)], null),event_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keydown","re-pressed.core/keydown",-1588093301),new cljs.core.Keyword(null,"clear-keys","clear-keys",-1035470539)], null),clear_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keydown","re-pressed.core/keydown",-1588093301),new cljs.core.Keyword(null,"always-listen-keys","always-listen-keys",497991050)], null),always_listen_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keydown","re-pressed.core/keydown",-1588093301),new cljs.core.Keyword(null,"prevent-default-keys","prevent-default-keys",1744205310)], null),prevent_default_keys)], null);
+re_frame.core.reg_event_fx.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$re_DASH_pressed$core_SLASH_set_DASH_keydown_DASH_rules,(function (p__14030,p__14031){
+var map__14032 = p__14030;
+var map__14032__$1 = ((((!((map__14032 == null)))?(((((map__14032.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14032.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14032):map__14032);
+var db = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14032__$1,cljs.core.cst$kw$db);
+var vec__14033 = p__14031;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14033,(0),null);
+var map__14036 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14033,(1),null);
+var map__14036__$1 = ((((!((map__14036 == null)))?(((((map__14036.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14036.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14036):map__14036);
+var opts = map__14036__$1;
+var event_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14036__$1,cljs.core.cst$kw$event_DASH_keys);
+var clear_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14036__$1,cljs.core.cst$kw$clear_DASH_keys);
+var always_listen_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14036__$1,cljs.core.cst$kw$always_DASH_listen_DASH_keys);
+var prevent_default_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14036__$1,cljs.core.cst$kw$prevent_DASH_default_DASH_keys);
+return new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$db,cljs.core.assoc_in(cljs.core.assoc_in(cljs.core.assoc_in(cljs.core.assoc_in(cljs.core.assoc_in(db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keydown,cljs.core.cst$kw$keys], null),null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keydown,cljs.core.cst$kw$event_DASH_keys], null),event_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keydown,cljs.core.cst$kw$clear_DASH_keys], null),clear_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keydown,cljs.core.cst$kw$always_DASH_listen_DASH_keys], null),always_listen_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keydown,cljs.core.cst$kw$prevent_DASH_default_DASH_keys], null),prevent_default_keys)], null);
 }));
-re_frame.core.reg_event_fx.call(null,new cljs.core.Keyword("re-pressed.core","set-keypress-rules","re-pressed.core/set-keypress-rules",1541561860),(function (p__12175,p__12176){
-var map__12177 = p__12175;
-var map__12177__$1 = ((((!((map__12177 == null)))?(((((map__12177.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__12177.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__12177):map__12177);
-var db = cljs.core.get.call(null,map__12177__$1,new cljs.core.Keyword(null,"db","db",993250759));
-var vec__12178 = p__12176;
-var _ = cljs.core.nth.call(null,vec__12178,(0),null);
-var map__12181 = cljs.core.nth.call(null,vec__12178,(1),null);
-var map__12181__$1 = ((((!((map__12181 == null)))?(((((map__12181.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__12181.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__12181):map__12181);
-var opts = map__12181__$1;
-var event_keys = cljs.core.get.call(null,map__12181__$1,new cljs.core.Keyword(null,"event-keys","event-keys",-835966631));
-var clear_keys = cljs.core.get.call(null,map__12181__$1,new cljs.core.Keyword(null,"clear-keys","clear-keys",-1035470539));
-var always_listen_keys = cljs.core.get.call(null,map__12181__$1,new cljs.core.Keyword(null,"always-listen-keys","always-listen-keys",497991050));
-return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"db","db",993250759),cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keypress","re-pressed.core/keypress",1975307043),new cljs.core.Keyword(null,"keys","keys",1068423698)], null),null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keypress","re-pressed.core/keypress",1975307043),new cljs.core.Keyword(null,"event-keys","event-keys",-835966631)], null),event_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keypress","re-pressed.core/keypress",1975307043),new cljs.core.Keyword(null,"clear-keys","clear-keys",-1035470539)], null),clear_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keypress","re-pressed.core/keypress",1975307043),new cljs.core.Keyword(null,"always-listen-keys","always-listen-keys",497991050)], null),always_listen_keys)], null);
+re_frame.core.reg_event_fx.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$re_DASH_pressed$core_SLASH_set_DASH_keypress_DASH_rules,(function (p__14039,p__14040){
+var map__14041 = p__14039;
+var map__14041__$1 = ((((!((map__14041 == null)))?(((((map__14041.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14041.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14041):map__14041);
+var db = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14041__$1,cljs.core.cst$kw$db);
+var vec__14042 = p__14040;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14042,(0),null);
+var map__14045 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14042,(1),null);
+var map__14045__$1 = ((((!((map__14045 == null)))?(((((map__14045.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14045.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14045):map__14045);
+var opts = map__14045__$1;
+var event_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14045__$1,cljs.core.cst$kw$event_DASH_keys);
+var clear_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14045__$1,cljs.core.cst$kw$clear_DASH_keys);
+var always_listen_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14045__$1,cljs.core.cst$kw$always_DASH_listen_DASH_keys);
+return new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$db,cljs.core.assoc_in(cljs.core.assoc_in(cljs.core.assoc_in(cljs.core.assoc_in(db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keypress,cljs.core.cst$kw$keys], null),null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keypress,cljs.core.cst$kw$event_DASH_keys], null),event_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keypress,cljs.core.cst$kw$clear_DASH_keys], null),clear_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keypress,cljs.core.cst$kw$always_DASH_listen_DASH_keys], null),always_listen_keys)], null);
 }));
-re_frame.core.reg_event_fx.call(null,new cljs.core.Keyword("re-pressed.core","set-keyup-rules","re-pressed.core/set-keyup-rules",519284589),(function (p__12184,p__12185){
-var map__12186 = p__12184;
-var map__12186__$1 = ((((!((map__12186 == null)))?(((((map__12186.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__12186.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__12186):map__12186);
-var db = cljs.core.get.call(null,map__12186__$1,new cljs.core.Keyword(null,"db","db",993250759));
-var vec__12187 = p__12185;
-var _ = cljs.core.nth.call(null,vec__12187,(0),null);
-var map__12190 = cljs.core.nth.call(null,vec__12187,(1),null);
-var map__12190__$1 = ((((!((map__12190 == null)))?(((((map__12190.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__12190.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__12190):map__12190);
-var opts = map__12190__$1;
-var event_keys = cljs.core.get.call(null,map__12190__$1,new cljs.core.Keyword(null,"event-keys","event-keys",-835966631));
-var clear_keys = cljs.core.get.call(null,map__12190__$1,new cljs.core.Keyword(null,"clear-keys","clear-keys",-1035470539));
-var always_listen_keys = cljs.core.get.call(null,map__12190__$1,new cljs.core.Keyword(null,"always-listen-keys","always-listen-keys",497991050));
-return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"db","db",993250759),cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keyup","re-pressed.core/keyup",-981006728),new cljs.core.Keyword(null,"keys","keys",1068423698)], null),null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keyup","re-pressed.core/keyup",-981006728),new cljs.core.Keyword(null,"event-keys","event-keys",-835966631)], null),event_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keyup","re-pressed.core/keyup",-981006728),new cljs.core.Keyword(null,"clear-keys","clear-keys",-1035470539)], null),clear_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("re-pressed.core","keyup","re-pressed.core/keyup",-981006728),new cljs.core.Keyword(null,"always-listen-keys","always-listen-keys",497991050)], null),always_listen_keys)], null);
+re_frame.core.reg_event_fx.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$re_DASH_pressed$core_SLASH_set_DASH_keyup_DASH_rules,(function (p__14048,p__14049){
+var map__14050 = p__14048;
+var map__14050__$1 = ((((!((map__14050 == null)))?(((((map__14050.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14050.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14050):map__14050);
+var db = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14050__$1,cljs.core.cst$kw$db);
+var vec__14051 = p__14049;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14051,(0),null);
+var map__14054 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14051,(1),null);
+var map__14054__$1 = ((((!((map__14054 == null)))?(((((map__14054.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14054.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14054):map__14054);
+var opts = map__14054__$1;
+var event_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14054__$1,cljs.core.cst$kw$event_DASH_keys);
+var clear_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14054__$1,cljs.core.cst$kw$clear_DASH_keys);
+var always_listen_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14054__$1,cljs.core.cst$kw$always_DASH_listen_DASH_keys);
+return new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$db,cljs.core.assoc_in(cljs.core.assoc_in(cljs.core.assoc_in(cljs.core.assoc_in(db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keyup,cljs.core.cst$kw$keys], null),null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keyup,cljs.core.cst$kw$event_DASH_keys], null),event_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keyup,cljs.core.cst$kw$clear_DASH_keys], null),clear_keys),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keyup,cljs.core.cst$kw$always_DASH_listen_DASH_keys], null),always_listen_keys)], null);
 }));
-
-//# sourceMappingURL=core.js.map

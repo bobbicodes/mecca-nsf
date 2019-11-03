@@ -21,8 +21,15 @@
           (set! (.-onload reader)
                 (fn [e]
                   (dispatch [:file-upload
-                             (crypt/byteArrayToHex
-                              (js/Uint8Array. (-> e .-target .-result)))
-                             ])))))}]]
-   [:h2 "Hex dump:"]
-   [:p (str @(subscribe [:file-upload]))]])
+                             (-> e .-target .-result
+                                 (js/Uint8Array.)
+                                 crypt/byteArrayToHex)])))))}]]
+   (let [file (subscribe [:file-upload])]
+     [:div
+      [:h2 "Hex dump:"]
+      [:p (str @file)]
+      [:h2 "Header:"]
+      [:p (apply str (take 10 @file))]
+      (if (= (apply str (take 10 @file)) "4e45534d1a")
+        [:h3 "This is a valid NSF file"])])
+   ])
