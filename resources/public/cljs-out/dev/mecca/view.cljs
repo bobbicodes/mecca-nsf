@@ -15,19 +15,27 @@
    (crypt/hexToByteArray s)))
 
 (defn file-info []
-  (let [file (subscribe [:file-upload])]
+  (let [file (subscribe [:file-upload])
+        valid? (= (apply str (take 10 @file)) "4e45534d1a")]
     [:div
+     (if valid?
+       [:h3.green "This is an NSF file :)"])
      [:h2 "Hex dump:"]
      [:p (str @file)]
-     [:div#parent
-      [:div#narrow 
-       [:h2 "Hex:"]
-       [:p (partition 2 (apply str (take 10 @file)))]]
-      [:div#wide 
+     [:div.container
+      [:div.item
+       [:h3 "Offsets"]
+       [:p "$000 - $004"]]
+      [:div.item
+       [:h3 "Hex:"]
+       [:p (str (apply str (first (partition 2 @file)))
+                " " (get-offset 1)
+                " " (get-offset 2)
+                " " (get-offset 3)
+                " " (get-offset 4))]]
+      [:div.item 
        [:h3 "ASCII:"]
-       [:p (hex->ascii (apply str (take 8 @file)))]]]
-     (if (= (apply str (take 10 @file)) "4e45534d1a")
-       [:h3.green "This is an NSF file :)"])]))
+       [:p (hex->ascii (apply str (take 8 @file)))]]]]))
 
 (defn file-import []
   [:div
