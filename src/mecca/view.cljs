@@ -15,31 +15,40 @@
    (crypt/hexToByteArray s)))
 
 (defn file-info []
-  (let [file (subscribe [:file-upload])
+  (let [file   (subscribe [:file-upload])
         valid? (= (apply str (take 10 @file)) "4e45534d1a")]
     [:div
      (if valid?
-       [:h3.green "This is an NSF file :)"])
-     [:h2 "Hex dump:"]
-     [:p (str @file)]
+       [:h4.green "Valid NSF file :)"])
+     [:p]
+     [:p (str "Version number: " (get-offset 5))]
+     [:p (str "Total songs: " (js/parseInt (str "0x" (get-offset 6))))]
      [:div.container
       [:div.item
        [:h3 "Offsets"]
-       [:p "$000 - $004"]]
+       [:p "$000 - $004"]
+       [:p "$005"]
+       [:p "$006"]]
       [:div.item
        [:h3 "Hex:"]
-       [:p (str (apply str (first (partition 2 @file)))
+       [:p (str " " (get-offset 0)
                 " " (get-offset 1)
                 " " (get-offset 2)
                 " " (get-offset 3)
-                " " (get-offset 4))]]
-      [:div.item 
+                " " (get-offset 4))]
+       [:p (get-offset 5)]
+       [:p (get-offset 6)]]
+      [:div.item
        [:h3 "ASCII:"]
-       [:p (hex->ascii (apply str (take 8 @file)))]]]]))
+       [:p (hex->ascii (apply str (take 8 @file)))]]
+      [:p]
+      [:h2 "Hex dump:"]
+      [:p (str @file)]]]))
 
 (defn file-import []
   [:div
    [:h1 "Import NSF file"]
+   [:h4 "Web parser for NES Sound Format"]
    [:p]
    [:div
     [:input#input
@@ -60,7 +69,8 @@
      {:on-click
       (fn [e]
         (dispatch [:file-upload asterix-hex]))}
-     "Load sample"]]])
+     "Load sample"]
+    [:p]]])
 
 (defn mecca []
   [:div

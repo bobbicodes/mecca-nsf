@@ -52,7 +52,7 @@ body {
 .item {
   flex: 0 32%;
   height: 100px;
-  margin-bottom: 2%; /* (100-32*3)/2 */
+  margin-bottom: 6%; /* (100-32*3)/2 */
 }
 
 h2 {
@@ -60,7 +60,7 @@ h2 {
 }
 
 .green {
-  color: rgb(30, 230, 30);
+  color: rgb(29, 180, 29);
 }
 
   h1 {
@@ -68,15 +68,25 @@ h2 {
     color: purple;
     /* 2x body copy size = 32px */
     line-height: 1;
-    padding : 3px;
+    padding : 2px;
+    margin : 0;
+    /* 45px / 36px */
+  }
+
+  h4 {
+    font-size: 1em;
+    color: rgb(220, 20, 170);
+    /* 2x body copy size = 32px */
+    line-height: 1;
+    padding : 4px;
     margin : 0;
     /* 45px / 36px */
   }
 
   p {
     font-size : 16px;
-    padding : 2px;
-    color: crimson;
+    padding : 4px;
+    color: rgb(25, 36, 187);
     margin : 0;
     line-height : 16px;
 }
