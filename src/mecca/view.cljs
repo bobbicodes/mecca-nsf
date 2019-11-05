@@ -6,33 +6,33 @@
             [goog.crypt :as crypt]
             [mecca.asterix :refer [asterix-hex]]))
 
-(defn offset [n]
-  (let [file (subscribe [:file-upload])]
-    (apply str (first (drop n (partition 2 @file))))))
-
-(defn offsets [from to]
-  (let [file (subscribe [:file-upload])]
-    (map #(apply str %)
-         (partition 2 (take (- (* 2 to) (* 2 from)) (drop (* 2 from) @file))))))
+(defn offset
+  ([n] (offset n (inc n)))
+  ([from to]
+     (map #(apply str %)
+          (partition 2 (take (- (* 2 to) (* 2 from))
+                             (drop (* 2 from) @(subscribe [:file-upload])))))))
 
 (defn hex->ascii [s]
   (crypt/byteArrayToString
    (crypt/hexToByteArray (apply str s))))
   
 (def header 
-  [[0x00 0x04] [0x05 0x06] [0x06 0x07] [0x07 0x08]
+  [[0x00 0x05] [0x05 0x06] [0x06 0x07] [0x07 0x08]
    [0x08 0x0a] [0x0a 0x0c] [0x0c 0x0e] [0x0e 0x2e]
    [0x2e 0x4e] [0x4e 0x6e] [0x6e 0x70] [0x70 0x78]
    [0x7a 0x7b] [0x7b 0x7c] [0x7c 0x7d] [0x7d 0x7e]])
 
 (defn offsets-table []
   [:table.tg
-   [:tr [:th.tg-0pky "Offset"] [:th.tg-0lax "Hex"] [:th.tg-0lax "ASCII"]]
-   (for [[from to] header]
-     [:tr
-      [:td.tg-hmp3 (str "0x" (.toString from 16))]
-      [:td.tg-hmp3 (apply str (interpose " " (offsets from to)))]
-      [:td.tg-hmp3 (hex->ascii (offsets from to))]])])
+   [:tbody
+    [:tr [:th.tg-0pky "Offset"] [:th.tg-0lax "Hex"] [:th.tg-0lax "ASCII"]]
+    (doall (for [[from to] header]
+             ^{:key [from to]}
+             [:tr
+              [:td.tg-hmp3 (str "0x" (.toString from 16))]
+              [:td.tg-hmp3 (apply str (interpose " " (offset from to)))]
+              [:td.tg-hmp3 (hex->ascii (offset from to))]]))]])
 
 (defn file-info []
   (let [file   (subscribe [:file-upload])
@@ -41,24 +41,27 @@
      (if valid?
        [:h4.green "Valid NSF file :)"])
      [:h2 "Header:"]
-     [:p (str "Version number: " (offset 5))]
-     [:p (str "Total songs: " (js/parseInt (str "0x" (offset 6))))]
-     [:p (str "Starting song: " (js/parseInt (str "0x" (offset 7))))]
-     [:p (str "Load address: " (offsets 0x08 0x0a))]
-     [:p (str "Init address: " (offsets 0x0a 0x0c))]
-     [:p (str "Play address: " (offsets 0x0c 0x0e))]
-     [:p (str "Song name: " (hex->ascii (offsets 0x0e 0x2e)))]
-     [:p (str "Artist: " (hex->ascii (offsets 0x2e 0x4e)))]
-     [:p (str "Copyright: " (hex->ascii (offsets 0x4e 0x6e)))]
-     [:p (str "Play speed (NTSC): " (offsets 0x6e 0x70))]
-     [:p (str "Bankswitch init values: " (offsets 0x70 0x78))]
-     [:p (str "Play speed (PAL): " (offsets 0x78 0x7a))]
-     [:p (str "PAL/NTSC: " (offsets 0x7a 0x7b))]
-     [:p (str "Extra Sound Chip Support: " (offsets 0x7b 0x7c))]
+     [:p (str "Version number: " (first (offset 0x05)))]
+     [:p (str "Total songs: " (js/parseInt (str "0x" (offset 0x06))))]
+     [:p (str "Starting song: " (js/parseInt (str "0x" (offset 0x07))))]
+     [:p (str "Load address: " (offset 0x08 0x0a))]
+     [:p (str "Init address: " (offset 0x0a 0x0c))]
+     [:p (str "Play address: " (offset 0x0c 0x0e))]
+     [:p (str "Song name: " (hex->ascii (offset 0x0e 0x2e)))]
+     [:p (str "Artist: " (hex->ascii (offset 0x2e 0x4e)))]
+     [:p (str "Copyright: " (hex->ascii (offset 0x4e 0x6e)))]
+     [:p (str "Play speed (NTSC): " (offset 0x6e 0x70))]
+     [:p (str "Bankswitch init values: " (offset 0x70 0x78))]
+     [:p (str "Play speed (PAL): " (offset 0x78 0x7a))]
+     [:p (str "PAL/NTSC: " (first (offset 0x7a)))]
+     [:p (str "Extra Sound Chip Support: " (let [byte (first (offset 0x7b))]
+                                             (case byte
+                                               "01" "This song uses VRC6 audio"
+                                               "N/A")))]
      [:p]
      [offsets-table]
       [:h2 "Music data:"]
-     [:p (interpose " " (partition 2 (drop 256 @file)))]]))
+     [:p (interpose " " (partition 2 (take 1000 (drop 256 @file))))]]))
 
 (defn file-import []
   [:div
