@@ -57,8 +57,8 @@
      [:p (str "Extra Sound Chip Support: " (offsets 0x7b 0x7c))]
      [:p]
      [offsets-table]
-      [:h2 "Hex dump:"]
-      [:p (str @file)]]))
+      [:h2 "Music data:"]
+     [:p (interpose " " (partition 2 (drop 256 @file)))]]))
 
 (defn file-import []
   [:div
