@@ -70,7 +70,6 @@ cljs.core.cst$kw$re_DASH_frame$std_DASH_interceptors_SLASH_not_DASH_found = new 
 cljs.core.cst$kw$queue = new cljs.core.Keyword(null,"queue","queue",1455835879);
 cljs.core.cst$kw$displayName = new cljs.core.Keyword(null,"displayName","displayName",-809144601);
 cljs.core.cst$sym$args = new cljs.core.Symbol(null,"args","args",-1338879193,null);
-cljs.core.cst$kw$h4$green = new cljs.core.Keyword(null,"h4.green","h4.green",-24768633);
 cljs.core.cst$sym$xform = new cljs.core.Symbol(null,"xform","xform",-85179481,null);
 cljs.core.cst$kw$validator = new cljs.core.Keyword(null,"validator","validator",-1966190681);
 cljs.core.cst$sym$finally = new cljs.core.Symbol(null,"finally","finally",-1065347064,null);

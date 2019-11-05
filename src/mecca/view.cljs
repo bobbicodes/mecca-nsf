@@ -44,7 +44,6 @@
     [:div
      (if valid?
        [:div 
-        [:h4.green "Valid NSF file :)"]
         [:h2 "Header:"]
         [:p (str "Version number: " (first (offsets 0x05)))]
         [:p (str "Total songs: " (js/parseInt (str "0x" (first (offsets 0x06)))))]
@@ -55,15 +54,20 @@
         [:p (str "Song name: " (hex->ascii (offsets 0x0e 0x2e)))]
         [:p (str "Artist: " (hex->ascii (offsets 0x2e 0x4e)))]
         [:p (str "Copyright: " (hex->ascii (offsets 0x4e 0x6e)))]
-        [:p (str "Play speed (NTSC): " (js/parseInt (word 0x6e)))]
+        [:p (str "Play speed (NTSC): " (js/parseInt (word 0x6e)) " (in 1/1000000th sec ticks)")]
         [:p (str "Bankswitch init values: " (offsets 0x70 0x78))]
-        [:p (str "Play speed (PAL): " (js/parseInt (word 0x78)))]
+        [:p (str "Play speed (PAL): " (js/parseInt (word 0x78)) " (in 1/1000000th sec ticks)")]
         [:p (str "PAL/NTSC: " (first (offsets 0x7a)))]
-        [:p (str "Extra Sound Chip Support: " (let [byte (first (offsets 0x7b))]
-                                                (case byte
-                                                  "01" "This song uses VRC6 audio"
-                                                  "02" "This song uses VRC7 audio"
-                                                  "N/A")))]
+        [:p (str "Extra Sound Chip Support: "
+                 (let [byte (first (offsets 0x7b))]
+                   (case byte
+                     "01" "This song uses VRC6 audio"
+                     "02" "This song uses VRC7 audio"
+                     "04" "This song uses FDS audio"
+                     "08" "This song uses MMC5 audio"
+                     "10" "This song uses Namco 163 audio"
+                     "20" "This song uses Sunsoft 5B audio"
+                     byte)))]
         [:p]
         [:h2 "Offsets:"]
         [offsets-table]
