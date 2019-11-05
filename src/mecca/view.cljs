@@ -6,44 +6,61 @@
             [goog.crypt :as crypt]
             [mecca.asterix :refer [asterix-hex]]))
 
-(defn get-offset [n]
+(defn offset [n]
   (let [file (subscribe [:file-upload])]
     (apply str (first (drop n (partition 2 @file))))))
 
+(defn offsets [from to]
+  (let [file (subscribe [:file-upload])]
+    (map #(apply str %)
+         (partition 2 (take (- (* 2 to) (* 2 from)) (drop (* 2 from) @file))))))
+
 (defn hex->ascii [s]
   (crypt/byteArrayToString
-   (crypt/hexToByteArray s)))
+   (crypt/hexToByteArray (apply str s))))
+  
+(def header 
+  [[0x00 0x04]
+   [0x05 0x06] 
+   [0x06 0x07] 
+   [0x07 0x08] 
+   [0x08 0x0a]
+   [0x0a 0x0b]
+   [0x0c 0x0d]
+   [0x0e 0x2e]
+   [0x2e 0x4e]
+   [0x4e 0x6e]
+   [0x6e 0x70]
+   [0x70 0x78]
+   [0x7a 0x7b]
+   [0x7b 0x7c]
+   [0x7c 0x7d]
+   [0x7d 0x7e]
+   [0x80 0x81]
+   ])
+
+(defn offsets-table []
+  [:table.tg
+   [:tr [:th.tg-0pky "Offset"] [:th.tg-0lax "Hex"] [:th.tg-0lax "ASCII"]]
+   (for [[from to] header]
+     [:tr
+      [:td.tg-hmp3 (str "0x" (.toString from 16))]
+      [:td.tg-hmp3 (apply str (interpose " " (offsets from to)))]
+      [:td.tg-hmp3 (hex->ascii (offsets from to))]])])
 
 (defn file-info []
   (let [file   (subscribe [:file-upload])
-        valid? (= (apply str (take 10 @file)) "4e45534d1a")]
+        valid? (= (apply str (take 10 @file)) "4E45534D1A")]
     [:div
      (if valid?
        [:h4.green "Valid NSF file :)"])
+     [:h2 "Header:"]
+     [:p (str "Version number: " (offset 5))]
+     [:p (str "Total songs: " (js/parseInt (str "0x" (offset 6))))]
      [:p]
-     [:p (str "Version number: " (get-offset 5))]
-     [:p (str "Total songs: " (js/parseInt (str "0x" (get-offset 6))))]
-     [:div.container
-      [:div.item
-       [:h3 "Offsets"]
-       [:p "$000 - $004"]
-       [:p "$005"]
-       [:p "$006"]]
-      [:div.item
-       [:h3 "Hex:"]
-       [:p (str " " (get-offset 0)
-                " " (get-offset 1)
-                " " (get-offset 2)
-                " " (get-offset 3)
-                " " (get-offset 4))]
-       [:p (get-offset 5)]
-       [:p (get-offset 6)]]
-      [:div.item
-       [:h3 "ASCII:"]
-       [:p (hex->ascii (apply str (take 8 @file)))]]
-      [:p]
+     [offsets-table]
       [:h2 "Hex dump:"]
-      [:p (str @file)]]]))
+      [:p (str @file)]]))
 
 (defn file-import []
   [:div
@@ -64,12 +81,13 @@
                   (dispatch [:file-upload
                              (-> e .-target .-result
                                  (js/Uint8Array.)
-                                 crypt/byteArrayToHex)])))))}]
+                                 crypt/byteArrayToHex
+                                 .toUpperCase)])))))}]
     [:button
      {:on-click
       (fn [e]
         (dispatch [:file-upload asterix-hex]))}
-     "Load sample"]
+     "Load example file"]
     [:p]]])
 
 (defn mecca []

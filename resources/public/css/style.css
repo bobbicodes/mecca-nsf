@@ -50,10 +50,17 @@ body {
 }
 
 .item {
-  flex: 0 32%;
-  height: 100px;
-  margin-bottom: 6%; /* (100-32*3)/2 */
+  flex: 0 30%;
+  height: 1000px;
+  margin-bottom: 2%; /* (100-32*3)/2 */
 }
+
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:rgb(146, 13, 146);background-color:#e8edff;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#039;background-color:#f39ee5;}
+.tg .tg-hmp3{background-color:#D2E4FC;text-align:left;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
 
 h2 {
   font-size: 1.2em;
