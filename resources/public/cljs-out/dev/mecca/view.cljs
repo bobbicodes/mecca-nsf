@@ -42,8 +42,8 @@
        [:h4.green "Valid NSF file :)"])
      [:h2 "Header:"]
      [:p (str "Version number: " (first (offset 0x05)))]
-     [:p (str "Total songs: " (js/parseInt (str "0x" (offset 0x06))))]
-     [:p (str "Starting song: " (js/parseInt (str "0x" (offset 0x07))))]
+     [:p (str "Total songs: " (js/parseInt (str "0x" (first (offset 0x06)))))]
+     [:p (str "Starting song: " (js/parseInt (str "0x" (first (offset 0x07)))))]
      [:p (str "Load address: " (offset 0x08 0x0a))]
      [:p (str "Init address: " (offset 0x0a 0x0c))]
      [:p (str "Play address: " (offset 0x0c 0x0e))]
@@ -57,6 +57,7 @@
      [:p (str "Extra Sound Chip Support: " (let [byte (first (offset 0x7b))]
                                              (case byte
                                                "01" "This song uses VRC6 audio"
+                                               "02" "This song uses VRC7 audio"
                                                "N/A")))]
      [:p]
      [offsets-table]
