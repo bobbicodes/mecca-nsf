@@ -17,6 +17,18 @@
   (str "0x" (first (hex-bytes file (inc offset)))
        (first (hex-bytes file offset))))
 
+(defn load-address [file]
+  (word file 0x08))
+
+(defn init-address [file]
+  (word file 0x0a))
+
+(defn play-address [file]
+  (word file 0x0c))
+
+(defn bankswitch-vals [file]
+  (hex-bytes file 0x70 0x78))
+
 (defn hex->ascii [s]
   (crypt/byteArrayToString
    (crypt/hexToByteArray (apply str s))))
@@ -27,7 +39,7 @@
    [0x2e 0x4e] [0x4e 0x6e] [0x6e 0x70] [0x70 0x78]
    [0x7a 0x7b] [0x7b 0x7c] [0x7c 0x7d] [0x7d 0x7e]])
 
-(defn offsets-table [file]
+(defn header-table [file]
   [:table.tg
    [:tbody
     [:tr [:th.tg-0pky "Offset"] [:th.tg-0lax "Hex"] [:th.tg-0lax "ASCII"]]
@@ -43,14 +55,14 @@
         [:p (str "Version number: " (first (hex-bytes file 0x05)))]
         [:p (str "Total songs: " (js/parseInt (str "0x" (first (hex-bytes file 0x06)))))]
         [:p (str "Starting song: " (js/parseInt (str "0x" (first (hex-bytes file 0x07)))))]
-        [:p (str "Load address: " (word file 0x08))]
-        [:p (str "Init address: " (word file 0x0a))]
-        [:p (str "Play address: " (word file 0x0c))]
+        [:p (str "Load address: " (load-address file))]
+        [:p (str "Init address: " (init-address file))]
+        [:p (str "Play address: " (play-address file))]
         [:p (str "Song name: " (hex->ascii (hex-bytes file 0x0e 0x2e)))]
         [:p (str "Artist: " (hex->ascii (hex-bytes file 0x2e 0x4e)))]
         [:p (str "Copyright: " (hex->ascii (hex-bytes file 0x4e 0x6e)))]
         [:p (str "Play speed (NTSC): " (js/parseInt (word file 0x6e)) " (in 1/1000000th sec ticks)")]
-        [:p (str "Bankswitch init values: " (hex-bytes file 0x70 0x78))]
+        [:p (str "Bankswitch init values: " (bankswitch-vals file))]
         [:p (str "Play speed (PAL): " (js/parseInt (word file 0x78)) " (in 1/1000000th sec ticks)")]
         [:p (str "PAL/NTSC: " (first (hex-bytes file 0x7a)))]
         [:p (str "Extra Sound Chip Support: "
@@ -67,12 +79,17 @@
 (defn music-data [file]
   [:div
    [:h2 "Music data"]
-   [:p (interpose " " (partition 2 (drop 256 file)))]])
+   (if (= (bankswitch-vals file) ["00" "00" "00" "00" "00" "00" "00" "00"])
+     [:div 
+      [:p "This song does not use bankswitching."]
+      [:p (str "Initializing from $080 at load address " (load-address file) ".")]
+      [:h4 "Bank 1:"]])
+   [:p (interpose " " (partition 2 (hex-bytes file 0x80 0x107f)))]])
 
 (defn button [label onclick]
   [:button
    {:on-click onclick}
-   "Load example file"])
+   label])
 
 (defn file-import []
   [:div
@@ -105,7 +122,7 @@
      (if (nsf? file)
        [:div
         [:h2.green "This is an NSF song :)"]
-        [offsets-table file]
+        [header-table file]
         [:h3 "Song info:"]
         [song-info file]
         [music-data file]])]))
