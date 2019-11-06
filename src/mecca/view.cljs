@@ -40,15 +40,17 @@
    [0x7a 0x7b] [0x7b 0x7c] [0x7c 0x7d] [0x7d 0x7e]])
 
 (defn header-table [file]
-  [:table.tg
-   [:tbody
-    [:tr [:th.tg-0pky "Offset"] [:th.tg-0lax "Hex"] [:th.tg-0lax "ASCII"]]
-    (doall (for [[from to] header]
-             ^{:key [from to]}
-             [:tr
-              [:td.tg-hmp3 (str "0x" (.toString from 16))]
-              [:td.tg-hmp3 (apply str (interpose " " (hex-bytes file from to)))]
-              [:td.tg-hmp3 (hex->ascii (hex-bytes file from to))]]))]])
+  [:div
+   [:h3 "Header:"]
+   [:table.tg
+    [:tbody
+     [:tr [:th.tg-0pky "Offset"] [:th.tg-0lax "Hex"] [:th.tg-0lax "ASCII"]]
+     (doall (for [[from to] header]
+              ^{:key [from to]}
+              [:tr
+               [:td.tg-hmp3 (str "0x" (.toString from 16))]
+               [:td.tg-hmp3 (apply str (interpose " " (hex-bytes file from to)))]
+               [:td.tg-hmp3 (hex->ascii (hex-bytes file from to))]]))]]])
 
 (defn song-info [file]
        [:div
@@ -76,15 +78,33 @@
                      "20" "This song uses Sunsoft 5B audio"
                      byte)))]])
 
+(defn number-input [label value on-change]
+  [:label label
+   [:input
+    {:style     {:width            "6%"
+                 :background-color "lightgray"}
+     :type      "number"
+     :value     value
+     :on-change on-change}]])
+
+(def register-banks
+  [[0x80 0x107f] [0x107f 0x207e] [0x207e 0x307d] [0x307d 0x407c]
+   [0x407c 0x507b] [0x507b 0x607a] [0x607a 0x7079] [0x7079 0x8078]])
+
+(defn register-bank [file n]
+  (let [offsets (get register-banks (dec n))]
+    (hex-bytes file (first offsets) (last offsets))))
+  
 (defn music-data [file]
-  [:div
-   [:h2 "Music data"]
-   (if (= (bankswitch-vals file) ["00" "00" "00" "00" "00" "00" "00" "00"])
-     [:div 
-      [:p "This song does not use bankswitching."]
-      [:p (str "Initializing from $080 at load address " (load-address file) ".")]
-      [:h4 "Bank 1:"]])
-   [:p (interpose " " (partition 2 (hex-bytes file 0x80 0x107f)))]])
+  (let [bank (subscribe [:register-bank])]
+    [:div
+     [:h2 "Music data"]
+     (if (= (bankswitch-vals file) ["00" "00" "00" "00" "00" "00" "00" "00"])
+       [:div
+        [:p "This song does not use bankswitching."]
+        [:p (str "Initializing from $080 at load address " (load-address file) ".")]])
+     [number-input "Register bank " @bank #(dispatch [:select-bank (-> % .-target .-value)])]
+     [:p (interpose " " (partition 2 (register-bank file @bank)))]]))
 
 (defn button [label onclick]
   [:button
